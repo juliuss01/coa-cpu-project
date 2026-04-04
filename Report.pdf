@@ -1,0 +1,105 @@
+16-Bit CPU Design Using Logisim Evolution
+
+Abstract
+
+This project presents the design and implementation of a simple 16-bit CPU using Logisim Evolution. The objective is to understand the internal structure and operation of a processor by building its core components from scratch. The CPU is capable of executing a small set of instructions through a structured datapath, memory system, and manual control of operations.
+
+Introduction
+
+Modern computers rely on processors to execute instructions and perform computations. This project focuses on constructing a basic CPU to demonstrate how instructions are fetched, decoded, and executed at the hardware level. The design includes an Arithmetic Logic Unit (ALU), registers, memory, and a datapath that connects all components.
+
+The implementation is done in Logisim Evolution, which allows simulation of digital circuits and visualization of data flow.
+
+System Design
+
+Arithmetic Logic Unit (ALU)
+
+The ALU is a 16-bit unit responsible for performing arithmetic and logical operations. It supports operations such as addition, subtraction, multiplication, division, bitwise AND, OR, XOR, and shift operations. All operations are computed in parallel, and a multiplexer selects the desired output based on control signals.
+
+The ALU also includes a relational unit that performs comparisons such as greater than, less than, equal to, and not equal. These outputs are used for decision-making in instruction execution.
+
+Registers
+
+The CPU contains several registers used for temporary data storage:
+
+* Register A and Register B store operands for the ALU.
+* The Instruction Register (IR) holds the current instruction.
+* The Memory Buffer Register (MBR) temporarily stores data being transferred between memory and the CPU.
+* The Memory Address Register (MAR) holds the address of the memory location being accessed.
+* The Output Register stores the result of operations.
+
+Registers are designed with write enable, output enable, and clock inputs to control data flow and synchronization.
+
+Datapath
+
+The datapath is the core structure that connects all components of the CPU. A shared 16-bit bus allows data to move between registers, the ALU, and memory. Tri-state buffers are used to ensure that only one component drives the bus at a time.
+
+Register outputs are connected to the ALU inputs, and the ALU output is fed back into the bus for storage or further processing. The datapath enables the execution of instructions through controlled data movement.
+
+Memory System
+
+The CPU uses RAM to store both instructions and data. The memory is addressed using the MAR, and data is transferred through the MBR. This separation ensures proper synchronization and prevents direct conflicts between memory and the datapath.
+
+Program Counter (PC)
+
+The Program Counter keeps track of the address of the next instruction to be executed. It increments automatically after each instruction fetch, allowing sequential execution of the program.
+
+Instruction Format
+
+Each instruction is 16 bits:
+
+* The higher 8 bits represent the opcode.
+* The lower 8 bits represent the memory address or operand.
+
+This structure allows the CPU to identify the operation and the location of data in memory.
+
+Instruction Set
+
+The CPU supports a simple instruction set:
+
+* LoadA: Loads data from memory into Register A.
+* LoadB: Loads data from memory into Register B.
+* Arithmetic: Performs an ALU operation on values in Register A and Register B.
+* Store: Stores the result from the Output Register into memory.
+
+Operation
+
+The CPU operates in cycles controlled by a clock signal. Each instruction is executed through a sequence of steps:
+
+1. Fetch: The instruction is read from memory using the Program Counter and stored in the Instruction Register.
+2. Decode: The opcode is interpreted to determine the required operation.
+3. Execute: The appropriate components are activated to perform the operation.
+4. Store: The result is written back to memory or a register if required.
+
+In this implementation, control signals are applied manually to simulate the behavior of a control unit.
+
+Results
+
+The CPU was successfully able to:
+
+* Load values from memory into registers.
+* Perform arithmetic operations using the ALU.
+* Store results back into memory.
+* Execute instructions in sequence using the Program Counter.
+
+The simulation demonstrates correct data flow and operation of the CPU components.
+
+Challenges
+
+Several challenges were encountered during the design:
+
+* Managing bus conflicts when multiple components attempted to output simultaneously.
+* Correctly wiring control signals such as write enable and output enable.
+* Handling bit-width differences between components, especially with the MAR.
+* Ensuring proper synchronization using the clock signal.
+
+These challenges were resolved through careful design and testing of individual components.
+
+Conclusion
+
+This project provided practical insight into the internal workings of a CPU. By building each component and connecting them into a functional system, the theoretical concepts of computer architecture were reinforced. The final design successfully demonstrates how a processor executes instructions and manages data flow.
+
+Authors
+
+Osgood Andoh Junior
+Julius Babanawo Marcus Selasie
